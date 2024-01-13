@@ -23,8 +23,11 @@ list *create(float n)
     }
     return ptr;
 }
-list *addFront(float n)
+list *addFront()
 {
+    float n;
+    cout << "Enter to add Front" << endl;
+    cin >> n;
     list *ptr;
     ptr = new list;
     ptr->data = n;
@@ -41,8 +44,11 @@ list *addFront(float n)
     }
     return ptr;
 }
-list *addBack(float n)
+list *addBack()
 {
+    float n;
+    cout << "Enter to add Back" << endl;
+    cin >> n;
     list *ptr;
     list *newNode = new list;
     newNode->data = n;
@@ -62,8 +68,14 @@ list *addBack(float n)
     }
     return newNode;
 }
-list *addAfter(int n, int check)
+list *addAfter()
 {
+    float n;
+    cout << "Enter to add" << endl;
+    cin >> n;
+    float check;
+    cout << "Enter to add After" << endl;
+    cin >> check;
     bool notfound = true;
     list *newNode = new list;
     list *ptr = new list;
@@ -79,7 +91,7 @@ list *addAfter(int n, int check)
         {
 
             ptr = ptr->next;
-            cout << "jojo" << endl;
+            // cout << "jojo" << endl;
         }
         if (ptr->data == check)
         {
@@ -94,8 +106,14 @@ list *addAfter(int n, int check)
     }
     return newNode;
 }
-list *addBefore(float n, float check)
+list *addBefore()
 {
+    float n;
+    cout << "Enter to add" << endl;
+    cin >> n;
+    float check;
+    cout << "Enter to add Before" << endl;
+    cin >> check;
     bool onlyOneNode = false;
     bool notFound = true;
     list *ptr = new list;
@@ -145,6 +163,106 @@ list *addBefore(float n, float check)
     }
     return newNode;
 }
+void deleteStart()
+{
+    list *ptr = new list;
+    // newNode = new list;
+    if (start == nullptr)
+    {
+        cerr << "Empty List" << endl;
+    }
+    else
+    {
+        ptr = start;
+        start = ptr->next;
+        delete ptr;
+    }
+    // return ;
+}
+void deleteEnd()
+{
+    list *ptr = new list;
+    bool onlyOneNode = false;
+    bool notFound = true;
+    if (start == nullptr)
+    {
+        cerr << "Empty List" << endl;
+    }
+    else
+    {
+        ptr = start;
+        if (ptr->next == nullptr)
+        {
+            onlyOneNode = true;
+        }
+        if (!onlyOneNode)
+        {
+            while (ptr->next->next != nullptr)
+            {
+                ptr = ptr->next;
+            }
+            list *temp = ptr->next;
+
+            ptr->next = nullptr;
+            delete temp;
+        }
+        else
+        {
+            delete ptr;
+            start = nullptr;
+        }
+    }
+    // return ;
+}
+void deleteAfter()
+{
+    float check;
+    cout << "Enter to delete after" << endl;
+    cin >> check;
+    list *ptr = new list;
+    bool onlyOneNode = false;
+    bool notFound = false;
+    // float check;
+    if (start == nullptr)
+    {
+        cerr << "Empty list" << endl;
+    }
+    else
+    {
+        ptr = start;
+        if (ptr->next == nullptr)
+        {
+            onlyOneNode = true;
+        }
+        if (!onlyOneNode)
+        {
+            while (ptr->data != check)
+            {
+                ptr = ptr->next;
+                if (ptr->next == nullptr)
+                    break;
+            }
+            notFound = !(ptr->data == check);
+            if (notFound)
+            {
+                cout << "Value to delete after not found" << endl;
+            }
+            else
+            {
+                list *temp = new list;
+                temp = ptr->next;
+                ptr->next = temp->next;
+                delete temp;
+            }
+        }
+        else
+        {
+            cout << "Only one node" << endl;
+        }
+    }
+    return;
+}
+
 void display()
 {
     list *current = start;
@@ -154,23 +272,62 @@ void display()
         cout << current->data << "\t";
         current = current->next;
     }
+    cout << "Sucessful Display" << endl;
+}
+void displayMenu()
+{
+    cout << "1. Add Front\t2. Add Back\t3. Add Before\t4. Add After\n5. Delete Start\t6. Delete End\t7. Delete After\t8. Display List\n9. Exit" << endl;
 }
 
 int main()
 {
-    // addFront(20);
-    // addBack(5);
-    // addBack(4);
-    // addFront(2);
-    // addFront(3);
-    // addFront(5);
-    // addBack(6);
-    // addAfter(10, 5);
-    // addFront(2);
-    addFront(3);
-    addFront(7);
-    addBack(5);
-    addBefore(10, 5);
-    display();
+    int choice;
+    displayMenu();
+    do
+    {
+        cout << "Your response: ";
+        cin >> choice;
+        switch (choice)
+        {
+        case 1:
+            addFront();
+            break;
+
+        case 2:
+            addBack();
+            break;
+
+        case 3:
+            addBefore();
+            break;
+
+        case 4:
+            addAfter();
+            break;
+
+        case 5:
+            deleteStart();
+            break;
+
+        case 6:
+            deleteEnd();
+            break;
+
+        case 7:
+            deleteAfter();
+            break;
+
+        case 8:
+            display();
+            break;
+
+        case 9:
+            exit(0);
+            break;
+
+        default:
+            break;
+        }
+    } while (choice != 9);
     return 0;
 }
