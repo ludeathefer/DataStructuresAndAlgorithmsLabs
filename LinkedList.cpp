@@ -76,13 +76,14 @@ list *addAfter()
     float check;
     cout << "Enter to add After" << endl;
     cin >> check;
-    bool notfound = true;
+
     list *newNode = new list;
     list *ptr = new list;
     if (start == nullptr)
     {
         cerr << "EmptyList" << endl;
-        exit(1);
+        // exit(1);
+        return start;
     }
     else
     {
@@ -183,7 +184,7 @@ void deleteEnd()
 {
     list *ptr = new list;
     bool onlyOneNode = false;
-    bool notFound = true;
+
     if (start == nullptr)
     {
         cerr << "Empty List" << endl;
@@ -194,6 +195,8 @@ void deleteEnd()
         if (ptr->next == nullptr)
         {
             onlyOneNode = true;
+            delete ptr;
+            start = nullptr;
         }
         if (!onlyOneNode)
         {
@@ -205,11 +208,6 @@ void deleteEnd()
 
             ptr->next = nullptr;
             delete temp;
-        }
-        else
-        {
-            delete ptr;
-            start = nullptr;
         }
     }
     // return ;
@@ -233,6 +231,7 @@ void deleteAfter()
         if (ptr->next == nullptr)
         {
             onlyOneNode = true;
+            cout << "Only one node" << endl;
         }
         if (!onlyOneNode)
         {
@@ -255,12 +254,7 @@ void deleteAfter()
                 delete temp;
             }
         }
-        else
-        {
-            cout << "Only one node" << endl;
-        }
     }
-    return;
 }
 
 void display()
@@ -322,7 +316,7 @@ int main()
             break;
 
         case 9:
-            exit(0);
+            // exit(0);
             break;
 
         default:
