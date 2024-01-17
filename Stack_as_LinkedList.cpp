@@ -22,14 +22,55 @@ void push(float n)
         start = ptr;
     }
 }
-
 void pop()
 {
     Node *ptr = new Node;
     float val;
     if (start == nullptr)
     {
-        cerr << "Empty stack" << endl;
+        cerr << "Empty stack." << endl;
+    }
+    else
+    {
+        ptr = start;
+        val = ptr->data;
+        if (ptr->next == nullptr)
+        {
+            start = nullptr;
+        }
+        else
+        {
+            start = ptr->next;
+        }
+        // cout << "jojo" << endl;
+        delete ptr;
+        cout << "\n"
+             << val << " is popped." << endl;
+    }
+}
+void enqueue(float val)
+{
+    Node *ptr = new Node;
+    ptr->data = val;
+    if (start == nullptr)
+    {
+        start = ptr;
+        ptr->next = nullptr;
+    }
+    else
+    {
+        ptr->next = start;
+        start = ptr;
+    }
+}
+
+void dequeue()
+{
+    Node *ptr = new Node;
+    float val;
+    if (start == nullptr)
+    {
+        cerr << "Empty queue" << endl;
     }
     else
     {
@@ -53,8 +94,9 @@ void pop()
             ptr->next = nullptr;
             delete temp;
         }
+        cout << "\n"
+             << val << " is dequeued." << endl;
     }
-    cout << val << " is popped" << endl;
 }
 void display()
 {
@@ -70,13 +112,30 @@ void display()
 
 int main()
 {
-    push(2);
-    push(3);
-    push(4);
+    // push(2);
+    // push(3);
+    // push(4);
+    // push(5);
 
     // display();
     // pop();
-    pop();
-    // Note- my pop is working like dequeue operation. Make new pop and rename current pop as dequeue.
+    // pop();
+    // pop();
+    // pop();
+    // pop();
+
+    // pop();
+    enqueue(3);
+    enqueue(4);
+    enqueue(5);
     display();
+    // dequeue();
+    // dequeue();
+    dequeue();
+    dequeue();
+    dequeue();
+    dequeue();
+
+    display();
+    return 0;
 }
