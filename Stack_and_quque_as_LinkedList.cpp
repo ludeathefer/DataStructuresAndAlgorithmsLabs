@@ -7,8 +7,11 @@ struct Node
     Node *next;
 } *start = nullptr;
 
-void push(float n)
+void push()
 {
+    float n;
+    cout << "Enter val: ";
+    cin >> n;
     Node *ptr = new Node;
     ptr->data = n;
     if (start == nullptr)
@@ -48,8 +51,11 @@ void pop()
              << val << " is popped." << endl;
     }
 }
-void enqueue(float val)
+void enqueue()
 {
+    float val;
+    cout << "Enter val: ";
+    cin >> val;
     Node *ptr = new Node;
     ptr->data = val;
     if (start == nullptr)
@@ -109,33 +115,96 @@ void display()
         ptr = ptr->next;
     }
 }
+void displayMenu()
+{
+    cout << "1. Stack\t2. Queue\t3. Exit" << endl;
+}
+void displayStack()
+{
+    cout << "1. Push\t2. Pop\t3. Display\t4. Exit" << endl;
+}
+
+void displayQueue()
+{
+    cout << "1. Enqueue\t2. Dequeue\t3. Display\t4. Exit" << endl;
+}
 
 int main()
 {
-    // push(2);
-    // push(3);
-    // push(4);
-    // push(5);
+    int _choice;
+    int choice;
+    displayMenu();
+    do
+    {
 
-    // display();
-    // pop();
-    // pop();
-    // pop();
-    // pop();
-    // pop();
+        cout << "Choice: ";
+        cin >> _choice;
+        if (_choice == 1)
+        {
+            displayStack();
+            do
+            {
+                choice = 0;
+                cout << "choice: ";
+                cin >> choice;
+                if (choice == 1)
+                {
+                    push();
+                }
+                else if (choice == 2)
+                {
+                    pop();
+                }
+                else if (choice == 3)
+                {
+                    display();
+                }
+                else
+                {
+                    displayMenu();
+                    break;
+                }
 
-    // pop();
-    enqueue(3);
-    enqueue(4);
-    enqueue(5);
-    display();
-    // dequeue();
-    // dequeue();
-    dequeue();
-    dequeue();
-    dequeue();
-    dequeue();
+            } while (choice != 4);
+        }
+        else if (_choice == 2)
+        {
+            displayQueue();
+            do
+            {
+                choice = 0;
+                cout << "choice: ";
+                cin >> choice;
+                if (choice == 1)
+                {
+                    enqueue();
+                }
+                else if (choice == 2)
+                {
+                    dequeue();
+                }
+                else if (choice == 3)
+                {
+                    display();
+                }
+                else
+                {
+                    displayMenu();
+                    break;
+                }
 
-    display();
+            } while (choice != 4);
+        }
+
+        else
+        {
+
+            break;
+        }
+
+    }
+
+    while (_choice != 3);
+
     return 0;
 }
